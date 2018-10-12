@@ -1,0 +1,44 @@
+{
+  "login": [
+    {
+      "id": 1,
+      "name": "doulu",
+      "password": "doulu",
+      "email": "dou@lu.com"
+    }
+  ],
+  "registered": [
+    {
+      "username": "admin",
+      "password": "root",
+      "id": 1
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "body": "hello world11",
+      "postid": "1",
+      "id": 3
+    },
+    {
+      "username": "admin",
+      "password": "root",
+      "id": 4
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
