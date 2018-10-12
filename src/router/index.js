@@ -7,6 +7,10 @@ export default class IndexRouter extends React.Component {
     console.log(this.props.match, this.props.location);
     const category = this.props.location.search.split('=')[1];
     category && console.log(category);
+    if(category === 'living'){
+      // window.location.href = 'http://localhost:3000/blog/tuya';
+      window.open('http://localhost:3000/blog/tuya');
+    }
     switch (this.props.match.params.menu) {
       case 'index':
         defaultCon = '首页';
