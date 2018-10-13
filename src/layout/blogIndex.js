@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import IndexRouter from '../router';
 import './style.scss';
+import WrappedNormalLoginForm from '../components/login';
 
 const SubMenu = Menu.SubMenu;
 
@@ -10,7 +11,7 @@ export default class IndexLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 'mail',
+      current: 'index',
     }
   }
 
@@ -70,7 +71,7 @@ export default class IndexLayout extends Component {
               <Route path="/blog/:menu?" component={IndexRouter} />
             </div>
             <div className="r-aside">
-              右侧登录注册组件
+              <WrappedNormalLoginForm />
             </div>
           </div>
         </div>
