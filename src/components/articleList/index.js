@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { List, Avatar, Icon } from 'antd';
+import $ from 'jquery';
+import { List, Icon } from 'antd';
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -20,35 +21,51 @@ const IconText = ({ type, text }) => (
 );
 
 export default class ArticleList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: ''
+    }
+    const self = this;
+    $.ajax({
+      method: 'GET',
+      url: 'http://127.0.0.1:8000/list',
+      success: function (data) {
+        data && self.setState({ dataSource: data });
+      },
+      error: function (error) {
+        alert(error);
+        console.log('56', error)
+      }
+    });
+  }
+
   render() {
+    const { dataSource } = this.state;
     return (
-      <List
-        style={{ padding: '20px' }}
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 3,
-        }}
-        dataSource={listData}
-        footer={<div><b>ant design</b> footer part</div>}
-        renderItem={item => (
-          <List.Item
-            key={item.title}
-            actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-            extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
-          >
-            <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
-            />
-            {item.content}
-          </List.Item>
-        )}
-      />
+      !dataSource ? '暂时没有数据' :
+        <List
+          style={{ padding: '20px' }}
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            onChange: (page) => {
+              console.log(page);
+            },
+            pageSize: 3,
+          }}
+          dataSource={dataSource}
+          renderItem={item => (
+            <List.Item
+              key={item.title}
+              actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
+              extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+            >
+              <p className="article-tit">{item.title}</p>
+              <div className="article-desc">{item.content}</div>
+            </List.Item>
+          )}
+        />
     );
   }
 }
