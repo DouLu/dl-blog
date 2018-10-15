@@ -1,5 +1,6 @@
 import React from 'react';
-import ArticleList from '../components/articleList';
+import GetArticleList from '../page/articleList';
+import ArticleDetail from '../components/detail.js';
 export default class IndexRouter extends React.Component {
   // this.props.match
   // this.props.location
@@ -14,7 +15,12 @@ export default class IndexRouter extends React.Component {
     }
     switch (this.props.match.params.menu) {
       case 'index':
-        defaultCon = <ArticleList />;
+        const id = this.props.location.search.split('=')[1];
+        if (id) {
+          defaultCon = <ArticleDetail id={id} />;
+        } else {
+          defaultCon = <GetArticleList />;
+        }
         break;
       case 'tuya':
         defaultCon = '涂鸦';
